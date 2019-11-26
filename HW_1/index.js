@@ -6,6 +6,7 @@ let cardsList = [
   'B4R',
   'A3Y',
   'A7Y',
+  'B12R',
 ];
 
 function menStillStanding(cards) {
@@ -17,26 +18,32 @@ function menStillStanding(cards) {
   let remainedB = 11;
 
   cards.forEach((card) => {
-    const teamName = card.match(/^\w/).toString();
-    const playerNumber = +card.match(/\d+/);
-    const colorCard = card.match(/\w$/).toString();
+    if (remainedA >= 7 && remainedB >= 7) {
 
-    if (!teams[teamName][playerNumber]) {
-      teams[teamName][playerNumber] = colorCard;
-    }
-    else if (teams[teamName][playerNumber] === 'Y') {
-      teams[teamName][playerNumber] = 'R';
+      const teamName = card.match(/^\w/).toString();
+      const playerNumber = +card.match(/\d+/);
+      const colorCard = card.match(/\w$/).toString();
+
+      if (!teams[teamName][playerNumber]) {
+        teams[teamName][playerNumber] = colorCard;
+        if (teamName === 'A' && colorCard == 'R') {
+          remainedA--;
+        }
+        if (teamName === 'B' && colorCard == 'R') {
+          remainedB--;
+        }
+      }
+      else if (teams[teamName][playerNumber] === 'Y') {
+        teams[teamName][playerNumber] = 'R';
+        if (teamName === 'A') {
+          remainedA--;
+        }
+        if (teamName === 'B') {
+          remainedB--;
+        }
+      }
     }
   })
-
-  for (let i = 1; i <= 11; i++) {
-    if (teams.A[i] === 'R') {
-      remainedA--;
-    }
-    if (teams.B[i] === 'R') {
-      remainedB--;
-    }
-  }
 
   return [remainedA, remainedB];
 }
