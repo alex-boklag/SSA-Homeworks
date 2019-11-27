@@ -7,4 +7,4 @@ function repeat(string, count) {
   }
   return result;
 }
-console.log(repeat('баунти', 5) === 'баунти'.repeat(5));
+console.log(repeat('бал', 5),'бал'.repeat(5));
