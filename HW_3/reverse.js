@@ -1,5 +1,3 @@
-const array = [1, 3, 6, 7, 10];
-
 function reverse(array) {
   const length = array.length;
   for (let i = 0; i < length / 2; i += 1) {
@@ -7,4 +5,4 @@ function reverse(array) {
   }
   return array;
 }
-console.log(reverse(array), array.reverse());
+console.log(reverse([1, 3, 6, 7, 10]), [1, 3, 6, 7, 10].reverse());
