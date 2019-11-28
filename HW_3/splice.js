@@ -5,16 +5,18 @@ function splice(array, start, deleteCount) {
   if (start < 0) start = array.length + start;
   if (deleteCount > array.length - start) deleteCount = array.length - start;
 
-  const copyArray = [...array];
+  const newArray = [];
   const deletedElements = [];
+  const startArray = [...array];
+  array.length = 0;
 
   for (let i = start; i < start + deleteCount; i += 1) {
-    deletedElements.push(array[i]);
-    delete array[i];
+    deletedElements.push(startArray[i]);
+    delete startArray[i];
   }
-  for (let i = 0; i < array.length; i += 1) {
-    deletedElements.push(array[i]);
-    delete array[i];
+  for (let i = 0; i < startArray.length; i += 1) {
+    if (startArray[i] === undefined) continue;
+    array.push(startArray[i]);
   }
 
   return deletedElements;
