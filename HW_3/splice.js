@@ -5,7 +5,6 @@ function splice(array, start, deleteCount) {
   if (start < 0) start = array.length + start;
   if (deleteCount > array.length - start) deleteCount = array.length - start;
 
-  const newArray = [];
   const deletedElements = [];
   const startArray = [...array];
   array.length = 0;
