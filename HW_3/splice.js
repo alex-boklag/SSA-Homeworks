@@ -5,6 +5,7 @@ function splice(array, start, deleteCount) {
   if (start < 0) start = array.length + start;
   if (deleteCount > array.length - start) deleteCount = array.length - start;
 
+  const args = [...arguments];
   const deletedElements = [];
   const startArray = [...array];
   array.length = 0;
@@ -17,8 +18,11 @@ function splice(array, start, deleteCount) {
     if (startArray[i] === undefined) continue;
     array.push(startArray[i]);
   }
+  for (let i = 3; i < args.length; i += 1) {
+    array.push(args[i]);
+  }
 
   return deletedElements;
 }
-console.log(splice(array, 2, 3));
+console.log(splice(array, 1, 3, 28));
 console.log(array);
