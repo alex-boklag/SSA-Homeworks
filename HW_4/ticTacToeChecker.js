@@ -1,7 +1,7 @@
 const game = [
-  [1, 2, 1],
+  [2, 2, 1],
   [2, 1, 2],
-  [2, 1, 2]
+  [2, 1, 1]
 ]
 
 function ticTacToeChecker(game) {
@@ -16,7 +16,7 @@ function ticTacToeChecker(game) {
   const [line1, line2, line3] = game;
   const players = {};
 
-  for (let i = 1; i <= 2; i += 1) {
+  for (let i = 1; i < 3; i += 1) {
     if (line1[0] == line2[1] == line3[2] == i) players[i] = true;
     if (line1[2] == line2[1] == line3[0] == i) players[i] = true;
 
@@ -28,7 +28,7 @@ function ticTacToeChecker(game) {
     if (line1[1] == line2[1] == line3[1] == i) players[i] = true;
     if (line1[2] == line2[2] == line3[2] == i) players[i] = true;
   }
-  console.log(line1[0],line2[1],line3[2],1);
+  console.log(players);
   if (players[1] == players[2]) {
     return 0;
   }
