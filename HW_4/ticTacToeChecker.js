@@ -1,43 +1,59 @@
 const game = [
   [2, 2, 1],
-  [2, 1, 2],
-  [2, 1, 1]
-]
+  [2, 1, 1],
+  [1, 1, 2]
+];
 
 function ticTacToeChecker(game) {
   for (let i = 0; i < game.length; i += 1) {
     for (let j = 0; j < game[i].length; j += 1) {
-      if (game[i][j] == 0) {
+      if (game[i][j] === 0) {
         return -1;
       }
     }
   }
 
-  const [line1, line2, line3] = game;
   const players = {};
+  const modifiedGame = game.reduce((acc, val) => acc.concat(val), []).map(val => val % 2);
+  //convert the game to array in binary view 
 
-  for (let i = 1; i < 3; i += 1) {
-    if (line1[0] == line2[1] == line3[2] == i) players[i] = true;
-    if (line1[2] == line2[1] == line3[0] == i) players[i] = true;
+  if (modifiedGame[0] + modifiedGame[4] + modifiedGame[8] === 3) {
+    players.first = 'winner';
+  }
+  if (modifiedGame[0] + modifiedGame[4] + modifiedGame[8] === 0) {
+    players.second = 'winner';
+  }
+  if (modifiedGame[2] + modifiedGame[4] + modifiedGame[6] === 3) {
+    players.first = 'winner';
+  }
+  if (modifiedGame[2] + modifiedGame[4] + modifiedGame[6] === 0) {
+    players.second = 'winner';
+  }
+  //check diagonals
 
-    if (line1[0] == line1[1] == line1[2] == i) players[i] = true;
-    if (line2[0] == line2[1] == line2[2] == i) players[i] = true;
-    if (line3[0] == line3[1] == line3[2] == i) players[i] = true;
+  for (let i = 0; i < modifiedGame.length; i += 3) {
+    if (modifiedGame[i] + modifiedGame[i + 1] + modifiedGame[i + 2] === 3) {
+      players.first = 'winner';
+    }
+    if (modifiedGame[i] + modifiedGame[i + 1] + modifiedGame[i + 2] === 0) {
+      players.second = 'winner';
+    }
+  }
+  //check horizontals
 
-    if (line1[0] == line2[0] == line3[0] == i) players[i] = true;
-    if (line1[1] == line2[1] == line3[1] == i) players[i] = true;
-    if (line1[2] == line2[2] == line3[2] == i) players[i] = true;
+  for (let i = 0; i < 3; i += 1) {
+    if (modifiedGame[i] + modifiedGame[i + 3] + modifiedGame[i + 6] === 3) {
+      players.first = 'winner';
+    }
+    if (modifiedGame[i] + modifiedGame[i + 3] + modifiedGame[i + 6] === 0) {
+      players.second = 'winner';
+    }
   }
-  console.log(players);
-  if (players[1] == players[2]) {
-    return 0;
-  }
-  if (players[1] == true) {
-    return 1;
-  }
-  if (players[2] == true) {
-    return 2;
-  }
+  //check verticals
+
+  if (players.first === players.second) return 0;
+  if (players.first === 'winner') return 1;
+  if (players.second === 'winner') return 2;
 }
 
-console.log(ticTacToeChecker(game))
+console.log(ticTacToeChecker(game));
