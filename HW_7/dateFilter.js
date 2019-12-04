@@ -2,4 +2,4 @@ function datefilter() {
 
 }
 
-console.log(countdown());
+console.log(datefilter());
