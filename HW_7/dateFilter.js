@@ -13,23 +13,33 @@ function dateFilter(date, format) {
     date = new Date(Number(date));
   }
 
-  const variants = {
-    'yyyy': date.getFullYear(),
-    'yy': date.getFullYear().toString().slice(2),
-    'MM': (date.getUTCMonth() + 1 > 9) ? date.getUTCMonth() + 1 : `0${date.getUTCMonth() + 1}`,
-    'M': date.getUTCMonth() + 1,
-    'dd': (date.getDate() > 9) ? date.getDate() : `0${date.getDate()}`,
-    'd': date.getDate(),
-    'HH': (date.getUTCHours() > 9) ? date.getUTCHours() : `0${date.getUTCHours()}`,
-    'H': date.getUTCHours(),
-    'mm': (date.getUTCMinutes() > 9) ? date.getUTCMinutes() : `0${date.getUTCMinutes()}`,
-    'm': date.getUTCMinutes(),
-    'ss': (date.getUTCSeconds() > 9) ? date.getUTCSeconds() : `0${date.getUTCSeconds()}`,
-    's': date.getUTCSeconds(),
-  }
-
-  return format.replace(/(yy{1,4})|(M{1,2})|(d{1,2})|(H{1,2})|(m{1,2})|(s{1,2})/g, (name) => {
-    return variants[name];
+  return format.replace(/(y{2,4})|(M{1,2})|(d{1,2})|(H{1,2})|(m{1,2})|(s{1,2})/g, (name) => {
+    switch (name) {
+      case 'yyyy':
+        return date.getFullYear();
+      case 'yy':
+        return date.getFullYear().toString().slice(2);
+      case 'MM':
+        return (date.getUTCMonth() + 1 > 9) ? date.getUTCMonth() + 1 : `0${date.getUTCMonth() + 1}`;
+      case 'M':
+        return date.getUTCMonth() + 1;
+      case 'dd':
+        return (date.getDate() > 9) ? date.getDate() : `0${date.getDate()}`;
+      case 'd':
+        return date.getDate();
+      case 'HH':
+        return (date.getUTCHours() > 9) ? date.getUTCHours() : `0${date.getUTCHours()}`;
+      case 'H':
+        return date.getUTCHours();
+      case 'mm':
+        return (date.getUTCMinutes() > 9) ? date.getUTCMinutes() : `0${date.getUTCMinutes()}`;
+      case 'm':
+        return date.getUTCMinutes();
+      case 'ss':
+        return (date.getUTCSeconds() > 9) ? date.getUTCSeconds() : `0${date.getUTCSeconds()}`;
+      case 's':
+        return date.getUTCSeconds();
+    }
   });
 }
 
