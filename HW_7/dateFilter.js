@@ -13,7 +13,7 @@ function dateFilter(date, format) {
     date = new Date(Number(date));
   }
 
-  return format.replace(/(y{2,4})|(M{1,2})|(d{1,2})|(H{1,2})|(m{1,2})|(s{1,2})/g, (name) => {
+  return format.replace(/(y{4})|(y{2})|(M{1,2})|(d{1,2})|(H{1,2})|(m{1,2})|(s{1,2})/g, (name) => {
     switch (name) {
       case 'yyyy':
         return date.getFullYear();
@@ -39,11 +39,13 @@ function dateFilter(date, format) {
         return (date.getUTCSeconds() > 9) ? date.getUTCSeconds() : `0${date.getUTCSeconds()}`;
       case 's':
         return date.getUTCSeconds();
+      default: 
+        return name;
     }
   });
 }
 
 console.log(dateFilter(0, 'HH:mm'), '00:00');
-console.log(dateFilter('0', 'dd/MM/yyyy'), '01/01/1970');
+console.log(dateFilter('0', 'dd/MM/yyyy/yyy'), '01/01/1970/70y');
 console.log(dateFilter(new Date(0), 'd/M/yy H%m'), '1/1/70 0%0');
 console.log(dateFilter(new Date(0), 'ss@mm == s@m'), '00@00 == 0@0');
