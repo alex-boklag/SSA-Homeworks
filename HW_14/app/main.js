@@ -1,3 +1,3 @@
-import { Controller } from './something/Controller.js';
+import { Controller } from './films/Controller.js';
 
 const news = new Controller();
