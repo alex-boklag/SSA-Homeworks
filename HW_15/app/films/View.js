@@ -6,7 +6,7 @@ export class View {
     this.btnSearch = document.querySelector('.btn__search');
     this.inputSearch = document.querySelector('.input__search');
     this.btnLucky = document.querySelector('.btn__lucky');
-    this.templater = new Templater('/HW_15/app/films/templateFilm');
+    this.templater = new Templater('/app/films/templateFilm');
   }
 
   renderFilms(films) {
