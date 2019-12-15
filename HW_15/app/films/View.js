@@ -1,9 +1,12 @@
+import { Templater } from '../share/Templater.js';
+
 export class View {
   constructor() {
     this.domFilms = document.querySelector('.films');
     this.btnSearch = document.querySelector('.btn__search');
     this.inputSearch = document.querySelector('.input__search');
     this.btnLucky = document.querySelector('.btn__lucky');
+    this.templater = new Templater('/HW_15/app/films/templateFilm');
   }
 
   renderFilms(films) {
@@ -17,14 +20,7 @@ export class View {
   }
 
   prepareFilmsArticle(article) {
-    return `<div class="card mb-3" style="width: 18rem;">
-      <img src="https://image.tmdb.org/t/p/w200/${article.poster_path}" class="card-img-top" alt="${article.title}">
-      <div class="card-body">
-        <h5 class="card-title">${article.title}</h5>
-        <p class="card-text">${article.overview}</p>
-        <a href="https://image.tmdb.org/t/p/w200/${article.poster_path}" class="btn btn-primary">Open image</a>
-      </div>
-    </div>`;
+    return this.templater.getHTML(article);
   }
 
   addListeners(searchFunc, luckyFunc) {

@@ -1,0 +1,8 @@
+<div class="card mb-3" style="width: 18rem;">
+      <img src="https://image.tmdb.org/t/p/w200{{poster_path}}" class="card-img-top" alt="{{title}}">
+      <div class="card-body">
+        <h5 class="card-title">{{title}}</h5>
+        <p class="card-text">{{overview}}</p>
+        <a href="https://image.tmdb.org/t/p/w200/{{poster_path}}" class="btn btn-primary">Open image</a>
+      </div>
+</div>
