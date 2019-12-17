@@ -1,26 +1,25 @@
-import { Templater } from '../share/Templater.js';
+import { templater } from '../share/templater.js';
 
 export class View {
-  constructor() {
+  constructor(templateUrl) {
     this.domFilms = document.querySelector('.films');
     this.btnSearch = document.querySelector('.btn__search');
     this.inputSearch = document.querySelector('.input__search');
     this.btnLucky = document.querySelector('.btn__lucky');
-    this.templater = new Templater('/SSA-Homeworks/HW_15/app/films/templateFilm');
   }
 
-  renderFilms(films) {
+  renderFilms(films, templateUrl) {
     let newsStr = '';
 
     films.forEach(film => {
-      newsStr += this.prepareFilmsArticle(film);
+      newsStr += this.prepareFilmsArticle(film, templateUrl);
     });
 
     this.domFilms.innerHTML = newsStr;
   }
 
-  prepareFilmsArticle(article) {
-    return this.templater.getHTML(article);
+  prepareFilmsArticle(data, templateUrl) {
+    return templater.getHTML(data, templateUrl);
   }
 
   addListeners(searchFunc, luckyFunc) {
