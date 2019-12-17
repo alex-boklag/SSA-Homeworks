@@ -1,7 +1,7 @@
 import { templater } from '../share/templater.js';
 
 export class View {
-  constructor(templateUrl) {
+  constructor() {
     this.domFilms = document.querySelector('.films');
     this.btnSearch = document.querySelector('.btn__search');
     this.inputSearch = document.querySelector('.input__search');
