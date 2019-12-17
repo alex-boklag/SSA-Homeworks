@@ -5,6 +5,13 @@ export class Templater {
     this.prepareTemplate();
   }
 
+  static getInstance(url) {
+    if (Templater.instance === undefined) {
+      return new Templater(url);
+    }
+    return Templater.instance;
+  }
+
   prepareTemplate() {
     fetch(this.url)
       .then(prom => prom.text())
