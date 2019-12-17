@@ -9,8 +9,18 @@ export class Model {
     return fetch(this.searchLink + query)
       .then(resp => resp.json());
   }
+
   getTopFilms() {
     return fetch(this.luckyLink)
       .then(resp => resp.json());
+  }
+
+  getFormattedData(data) {
+    return Object.entries(data).map(el => {
+      return {
+        name: el[0],
+        value: el[1]
+      }
+    });
   }
 }
