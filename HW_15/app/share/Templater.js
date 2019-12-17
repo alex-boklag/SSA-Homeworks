@@ -1,40 +1,24 @@
-export class Templater {
-  constructor(url) {
-    this.url = url;
-    this.templateStr = '';
-    this.prepareTemplate();
-  }
+import { Model } from '../films/Model.js';
 
-  static getInstance(url) {
-    if (Templater.instance === undefined) {
-      return new Templater(url);
-    }
-    return Templater.instance;
-  }
+export const templater = {
+  model: new Model(),
+  str: '',
 
-  prepareTemplate() {
-    fetch(this.url)
+  getHTML(data, templateUrl) {
+    this.getTemplate(templateUrl);
+
+    const formattedData = this.model.getFormattedData(data);
+
+    formattedData.forEach(obj => {
+      this.str = this.str.replace(new RegExp(`{{${obj.name}}}`, 'g'), obj.value);
+    });
+
+    return this.str;
+
+  },
+  getTemplate(templateUrl) {
+    fetch(templateUrl)
       .then(prom => prom.text())
-      .then(txt => this.templateStr = txt);
-  }
-
-  getHTML(article) {
-    const data = this.prepareData(article);
-    let str = this.templateStr;
-
-    data.forEach(property => {
-      str = str.replace(new RegExp(`{{${property.name}}}`, 'g'), property.value);
-    });
-
-    return str;
-  }
-
-  prepareData(article) {
-    return Object.entries(article).map(el => {
-      return {
-        name: el[0],
-        value: el[1]
-      }
-    });
-  }
-}
+      .then(txt => this.str = txt);
+  },
+};
