@@ -6,6 +6,8 @@ export class Controller {
     this.model = new Model();
     this.view = new View();
     this.view.addListeners(this.handleClickSearchBtn.bind(this), this.handleClickLuckyBtn.bind(this));
+    this.templateUrl = '/SSA-Homeworks/HW_15/app/films/templateFilm';
+    //this.templateUrl = '/app/films/templateFilm';
   }
 
   handleClickSearchBtn() {
@@ -18,10 +20,10 @@ export class Controller {
 
   showFilms(query) {
     this.model.getSearchedFilms(query)
-      .then(filmsObj => this.view.renderFilms(filmsObj.results));
+      .then(filmsObj => this.view.renderFilms(filmsObj.results, this.templateUrl));
   }
   showTopFilms() {
     this.model.getTopFilms()
-      .then(filmsObj => this.view.renderFilms(filmsObj.results));
+      .then(filmsObj => this.view.renderFilms(filmsObj.results, this.templateUrl));
   }
 }
