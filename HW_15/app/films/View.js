@@ -1,4 +1,4 @@
-import { templater } from '../share/templater.js';
+import { Templater } from '../share/Templater.js';
 
 export class View {
   constructor() {
@@ -6,6 +6,7 @@ export class View {
     this.btnSearch = document.querySelector('.btn__search');
     this.inputSearch = document.querySelector('.input__search');
     this.btnLucky = document.querySelector('.btn__lucky');
+    this.templater = new Templater();
   }
 
   renderFilms(films, templateUrl) {
@@ -19,7 +20,7 @@ export class View {
   }
 
   prepareFilmsArticle(data, templateUrl) {
-    return templater.getHTML(data, templateUrl);
+    return this.templater.getHTML(data, templateUrl);
   }
 
   addListeners(searchFunc, luckyFunc) {

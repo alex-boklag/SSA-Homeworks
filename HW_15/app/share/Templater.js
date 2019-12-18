@@ -1,24 +1,34 @@
 import { Model } from '../films/Model.js';
 
-export const templater = {
-  model: new Model(),
-  str: '',
+export class Templater {
+  constructor() {
+    this.model = new Model();
+    this.template = '';
+
+    if (!Templater.instance) {
+      Templater.instance = this;
+    }
+
+    return Templater.instance;
+  }
+
+  static instance = false;
 
   getHTML(data, templateUrl) {
     this.getTemplate(templateUrl);
-
     const formattedData = this.model.getFormattedData(data);
+    let str = this.template;
 
     formattedData.forEach(obj => {
-      this.str = this.str.replace(new RegExp(`{{${obj.name}}}`, 'g'), obj.value);
+      str = str.replace(new RegExp(`{{${obj.name}}}`, 'g'), obj.value);
     });
 
-    return this.str;
+    return str;
+  }
 
-  },
   getTemplate(templateUrl) {
     fetch(templateUrl)
       .then(prom => prom.text())
-      .then(txt => this.str = txt);
-  },
+      .then(txt => this.template = txt);
+  }
 };
